@@ -8,7 +8,7 @@ gem 'rails', '3.0.10'
 gem 'mysql2', '~> 0.2.11'
 
 # Use unicorn as the web server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -23,9 +23,26 @@ gem 'mysql2', '~> 0.2.11'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
+## Toolkit
+gem 'jquery-rails'
+gem 'simple_form'
+gem 'will_paginate', '~> 3.0'
+gem 'responders'
+gem 'paperclip'
+gem 'stringex'
+
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+## Console tools
+gem 'wirble', :group => :development
+gem 'hirb', :group => :development
+
+## Testing
+group :development, :test do
+  gem 'rspec-rails', '~> 2.6.0'
+end
