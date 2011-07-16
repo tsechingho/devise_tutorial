@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110823070416) do
+ActiveRecord::Schema.define(:version => 20110823071215) do
 
   create_table "books", :force => true do |t|
     t.string   "url"
@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(:version => 20110823070416) do
     t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cover_image_file_name"
+    t.string   "cover_image_content_type"
+    t.integer  "cover_image_file_size"
+    t.datetime "cover_image_updated_at"
   end
 
   create_table "pages", :force => true do |t|
