@@ -44,5 +44,10 @@ module DeviseTutorial
     config.generators do |g|
       g.scaffold :stylesheets => false
     end
+
+    config.before_initialize do
+      require 'secret_config'
+      SecretConfig.auto_load_configs
+    end
   end
 end
