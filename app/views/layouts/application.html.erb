@@ -7,6 +7,8 @@
 </head>
 <body>
 
+<%= render 'layouts/user_navigation' unless %{sessions passwords registrations}.include? controller_name %>
+
 <%= yield %>
 
 <%= javascript_include_tag :defaults %>

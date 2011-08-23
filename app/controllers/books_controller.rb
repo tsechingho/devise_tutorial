@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_filter :authenticate_user!, :only => [:new, :create]
+
   # GET /books
   # GET /books.xml
   def index
