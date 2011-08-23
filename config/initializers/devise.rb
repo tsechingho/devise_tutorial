@@ -192,6 +192,20 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
+  # for testing, Donot verify SSL
+  # config.omniauth :facebook, FacebookSetting[:app_id], FacebookSetting[:app_secret], {
+  #   :client_options => { :ssl => { :verify => false } }
+  # }
+  # for debian server with ca_certificates path
+  # config.omniauth :facebook, FacebookSetting[:app_id], FacebookSetting[:app_secret], {
+  #   :client_options => { :ssl => { :ca_path => '/etc/ssl/certs' } }
+  # }
+  # for Heroku with ca_certificates file
+  config.omniauth :facebook, FacebookSetting[:app_id], FacebookSetting[:app_secret], {
+    :scope => 'email, offline_access',
+    :client_options => { :ssl => { :ca_file => '/usr/lib/ssl/certs/ca-certificates.crt' } }
+  }
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

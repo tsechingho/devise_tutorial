@@ -5,7 +5,8 @@ DeviseTutorial::Application.routes.draw do
     # delete 'managers/sign_out', :to => 'devise/sessions#destroy', :as => :destroy_manager_session
   end
 
-  devise_for :users do
+  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' } do
+    get 'users/auth/:provider', :to => 'users/omniauth_callbacks#passthru'
     get 'pages/:id', :to => 'pages#show', :as => 'user_root', :constraints => { :id => 'dashboard' }, :id => 'dashboard'
     # get 'users/sign_in', :to => 'devise/sessions#new', :as => :new_user_session
     # delete 'users/sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
