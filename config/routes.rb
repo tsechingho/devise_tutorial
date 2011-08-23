@@ -1,5 +1,9 @@
 DeviseTutorial::Application.routes.draw do
-  devise_for :managers
+  devise_for :managers do
+    get 'pages/:id', :to => 'pages#show', :as => 'manager_root', :constraints => { :id => 'management' }, :id => 'management'
+    # get 'managers/sign_in', :to => 'devise/sessions#new', :as => :new_manager_session
+    # delete 'managers/sign_out', :to => 'devise/sessions#destroy', :as => :destroy_manager_session
+  end
 
   devise_for :users do
     get 'pages/:id', :to => 'pages#show', :as => 'user_root', :constraints => { :id => 'dashboard' }, :id => 'dashboard'

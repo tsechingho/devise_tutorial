@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :create]
+  before_filter :authenticate_manager!, :only => [:edit, :update, :destroy]
 
   # GET /books
   # GET /books.xml

@@ -8,6 +8,7 @@
 <body>
 
 <%= render 'layouts/user_navigation' unless %{sessions passwords registrations}.include? controller_name %>
+<%= render 'layouts/manager_navigation' unless %{sessions passwords registrations}.include? controller_name %>
 
 <%= yield %>
 

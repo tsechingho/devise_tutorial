@@ -1,0 +1,13 @@
+<section>
+  <nav>
+    <% if manager_signed_in? %>
+      <%= current_manager.name %> |
+      <%= link_to t('home'), root_path %> |
+      <%= link_to t('management'), manager_root_path %> |
+      <%= link_to t("sign_out"), destroy_manager_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to t('home'), root_path %> |
+      <%= link_to t("sign_in"), new_manager_session_path %>
+    <% end %>
+  </nav>
+</section>
