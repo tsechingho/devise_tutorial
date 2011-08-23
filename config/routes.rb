@@ -1,4 +1,6 @@
 DeviseTutorial::Application.routes.draw do
+  devise_for :managers
+
   devise_for :users do
     get 'pages/:id', :to => 'pages#show', :as => 'user_root', :constraints => { :id => 'dashboard' }, :id => 'dashboard'
     # get 'users/sign_in', :to => 'devise/sessions#new', :as => :new_user_session
