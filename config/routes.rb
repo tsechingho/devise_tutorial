@@ -1,4 +1,6 @@
 DeviseTutorial::Application.routes.draw do
+  root :to => 'pages#show', :id => 'welcome'
+
   resources :pages
 
   # The priority is based upon order of creation:

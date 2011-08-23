@@ -5,3 +5,14 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+Page.create!([
+  { :title => 'Welcome' }, # site root
+  { :title => 'Dashboard' }, # user root
+  { :title => 'Management' }, # manager root
+  { :title => 'About' },
+  { :title => 'Help' },
+  { :title => 'Privacy' },
+  { :title => 'Copyright' },
+  { :title => 'Terms of Service' }
+])

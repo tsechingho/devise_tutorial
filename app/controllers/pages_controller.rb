@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_filter :load_page, :only => [:show, :edit, :update, :destroy]
+
   # GET /pages
   # GET /pages.xml
   def index
@@ -9,7 +11,6 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.xml
   def show
-    @page = Page.find(params[:id])
     respond_with(@page)
   end
 
@@ -22,7 +23,6 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
-    @page = Page.find(params[:id])
   end
 
   # POST /pages
@@ -36,7 +36,6 @@ class PagesController < ApplicationController
   # PUT /pages/1
   # PUT /pages/1.xml
   def update
-    @page = Page.find(params[:id])
     @page.update_attributes(params[:page])
     respond_with(@page)
   end
@@ -44,8 +43,13 @@ class PagesController < ApplicationController
   # DELETE /pages/1
   # DELETE /pages/1.xml
   def destroy
-    @page = Page.find(params[:id])
     @page.destroy
     respond_with(@page)
+  end
+
+  protected
+
+  def load_page
+    @page = Page.find_by_url(params[:id])
   end
 end
