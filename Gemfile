@@ -5,7 +5,9 @@ gem 'rails', '3.0.10'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2', '~> 0.2.11'
+# +Databases
+gem 'pg', :group => :production # for heroku
+gem 'mysql2', '~> 0.2.11', :group => [:development, :test]
 
 # Use unicorn as the web server
 gem 'unicorn'

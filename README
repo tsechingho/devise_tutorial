@@ -1,1 +1,13 @@
 This tutorial will introduce how to use devise to setup your authentication system of Rails 3.
+
+Heroku
+======
+
+You can deploy this tutorial to [heroku](http://heroku.com) by
+
+    heroku keys:add
+    heroku create
+    git push heroku master
+    heroku rake db:setup
+    heroku open
+
