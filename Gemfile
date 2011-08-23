@@ -38,6 +38,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'warden'
 gem 'devise', '~> 1.4.2'
 gem 'oa-oauth', :require => 'omniauth/oauth'
+gem 'oa-openid', :require => 'omniauth/openid'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
