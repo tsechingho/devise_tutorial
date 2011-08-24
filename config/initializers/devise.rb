@@ -218,6 +218,8 @@ Devise.setup do |config|
   config.omniauth :open_id, open_id_store, :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id'
   config.omniauth :open_id, open_id_store, :name => 'yahoo', :identifier => 'https://me.yahoo.com'
   config.omniauth :open_id, open_id_store, :name => 'openid' if Rails.env.development? # generic openid
+  config.omniauth :google_apps, open_id_store, :name => 'gmail', :domain => 'gmail.com'
+  config.omniauth :google_apps, open_id_store if Rails.env.development? # generic google apps
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
