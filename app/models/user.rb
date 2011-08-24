@@ -122,6 +122,32 @@ class User < ActiveRecord::Base
       )
     end
 
+    def find_with_yahoo_open_id(access_token, signed_in_resource = nil)
+      user = User.find_by_email(access_token['user_info']['email'])
+      user = User.create_with_yahoo_token(access_token) unless user
+      user
+    end
+
+    def create_with_yahoo_token(access_token)
+      info = access_token['user_info']
+      create(
+        :email => info['email'],
+        :password => Devise.friendly_token[0,20], # stub password
+        :authentications_attributes => [{
+          :provider => access_token['provider'],
+          :uid => access_token['uid'],
+          :uname => info['name'],
+          :uemail => info['email']
+        }],
+        :profile_attributes => {
+          :first_name => nil,
+          :last_name => nil,
+          :fullname => info['name'],
+          :nickname => info['nickname']
+        }
+      )
+    end
+
     def new_with_session(params, session)
       data = session['devise.facebook_data']
       super.tap do |user|
