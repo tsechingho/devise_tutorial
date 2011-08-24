@@ -215,6 +215,7 @@ Devise.setup do |config|
   require 'openid/store/filesystem'
   # set '/tmp' for Debian file store, set './tmp' for Heroku file store
   open_id_store = OpenID::Store::Filesystem.new('./tmp')
+  config.omniauth :open_id, open_id_store, :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id'
   config.omniauth :open_id, open_id_store, :name => 'openid' if Rails.env.development? # generic openid
 
   # ==> Warden configuration
