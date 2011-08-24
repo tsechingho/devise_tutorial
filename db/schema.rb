@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110823083554) do
+ActiveRecord::Schema.define(:version => 20110824093525) do
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "uname"
+    t.string   "uemail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "books", :force => true do |t|
     t.string   "url"

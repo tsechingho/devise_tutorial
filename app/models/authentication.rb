@@ -1,3 +1,5 @@
 class Authentication < ActiveRecord::Base
-  belongs_to :resource
+  validates :provider, :uid, :presence => true
+
+  belongs_to :resource, :polymorphic => true
 end

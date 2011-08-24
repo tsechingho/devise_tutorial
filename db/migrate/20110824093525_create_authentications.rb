@@ -1,7 +1,7 @@
 class CreateAuthentications < ActiveRecord::Migration
   def self.up
     create_table :authentications do |t|
-      t.references :resource
+      t.references :resource, :polymorphic => true
       t.string :provider
       t.string :uid
       t.string :uname
