@@ -39,6 +39,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+  def openid
+    render :text => request.env['omniauth.auth'].to_yaml
+  end
+
   # if response get 404, it will trigger OmniAuth process
   # also see call_through_to_app method in OmniAuth::Strategy of oa-core
   def passthru

@@ -208,6 +208,15 @@ Devise.setup do |config|
   config.omniauth :twitter, TwitterSetting[:consumer_key], TwitterSetting[:consumer_secret]
   config.omniauth :github, GithubSetting[:client_id], GithubSetting[:client_secret]
 
+  # ==> OpenID via OmniAuth
+  require 'openid/fetchers'
+  # ca_file: wget https://github.com/skrat/ruby-openid-apps-discovery/raw/master/lib/ca-bundle.crt
+  OpenID.fetcher.ca_file = "#{Rails.root}/config/ca-bundle.crt"
+  require 'openid/store/filesystem'
+  # set '/tmp' for Debian file store, set './tmp' for Heroku file store
+  open_id_store = OpenID::Store::Filesystem.new('./tmp')
+  config.omniauth :open_id, open_id_store, :name => 'openid' if Rails.env.development? # generic openid
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
