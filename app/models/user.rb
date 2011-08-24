@@ -6,12 +6,15 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :authentications_attributes
+                  :authentications_attributes, :profile_attributes
 
   has_many :authentications, :as => :resource, :dependent => :destroy
   accepts_nested_attributes_for :authentications
 
+  has_one :profile, :as => :resource, :dependent => :destroy
+  accepts_nested_attributes_for :profile
+
   def name
-    email
+    profile ? profile.nickname : email
   end
 end
