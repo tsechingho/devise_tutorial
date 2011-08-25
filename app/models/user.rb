@@ -69,6 +69,33 @@ class User < ActiveRecord::Base
       )
     end
 
+    def find_with_github_oauth(access_token, signed_in_resource = nil)
+      user = User.find_by_email(access_token['user_info']['email'])
+      user = User.create_with_github_token(access_token) unless user
+      user
+    end
+
+    def create_with_github_token(access_token)
+      info = access_token['user_info']
+      extra = access_token['extra']['user_hash']
+      create(
+        :email => (info['email'] || extra['email']),
+        :password => Devise.friendly_token[0,20], # stub password
+        :authentications_attributes => [{
+          :provider => access_token['provider'],
+          :uid => access_token['uid'],
+          :uname => (info['nickname'] || extra['login']),
+          :uemail => (info['email'] || extra['email'])
+        }],
+        :profile_attributes => {
+          :first_name => nil,
+          :last_name => nil,
+          :fullname => (info['name'] || extra['name']),
+          :nickname => (info['nickname'] || extra['login'])
+        }
+      )
+    end
+
     def new_with_session(params, session)
       data = session['devise.facebook_data']
       super.tap do |user|
