@@ -42,6 +42,33 @@ class User < ActiveRecord::Base
       )
     end
 
+    def find_with_twitter_oauth(access_token, signed_in_resource = nil)
+      authentication = Authentication.find_by_provider_and_uid('twitter', access_token['uid'])
+      user = authentication.resource if authentication
+      user = User.create_with_twitter_token(access_token) unless user
+      user
+    end
+
+    def create_with_twitter_token(access_token)
+      info = access_token['user_info']
+      create(
+        :email => "#{info['nickname']}@stubmail.com", # stub email
+        :password => Devise.friendly_token[0,20], # stub password
+        :authentications_attributes => [{
+          :provider => 'twitter',
+          :uid => access_token['uid'],
+          :uname => info['nickname'],
+          :uemail => nil # Twitter API never returns the email address
+        }],
+        :profile_attributes => {
+          :first_name => nil,
+          :last_name => nil,
+          :fullname => info['name'],
+          :nickname => info['nickname']
+        }
+      )
+    end
+
     def new_with_session(params, session)
       data = session['devise.facebook_data']
       super.tap do |user|
